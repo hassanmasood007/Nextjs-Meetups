@@ -3,9 +3,7 @@ import { MongoClient } from "mongodb";
 async function handler(req, res) {
   if (req.method === "POST") {
     const data = req.body;
-    const client = await MongoClient.connect(
-      "mongodb+srv://hassan:FEyOfDycQ9QWjbPc@cluster0.u4pjn.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
-    );
+    const client = await MongoClient.connect(process.env.NEXT_PUBLIC_MONGO_URL);
     const db = client.db();
     const meetupsCollection = db.collection("meetups");
     const result = await meetupsCollection.insertOne(data);
